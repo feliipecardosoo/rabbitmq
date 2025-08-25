@@ -1,6 +1,6 @@
 PROJECT_NAME = sistema-ibt
 IMAGE_NAME = rabbitmq-sistema-ibt
-NETWORK_NAME = rabbitmq-net
+NETWORK_NAME = sistema-ibt-network
 RABBIT_CONTAINER = rabbitmq-sistema-ibt
 
 # Cria a rede se não existir
