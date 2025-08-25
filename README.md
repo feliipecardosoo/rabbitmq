@@ -37,6 +37,8 @@ docker-compose logs -f app
 
 ## Estrutura do Projeto
 
+```
+
 rabbitmq/
 ├── Dockerfile
 ├── docker-compose.yaml
@@ -49,6 +51,7 @@ rabbitmq/
 │       └── rabbitmq/
 │           └── connection.go
 └── [README.md](http://_vscodecontentref_/0)
+```
 
 ## Observações
 
