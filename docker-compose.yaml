@@ -5,7 +5,7 @@ services:
       - "5673:5672"
       - "15673:15672"
     networks:
-      - rabbitmq-net
+      - sistema-ibt-network
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 5s
@@ -13,5 +13,5 @@ services:
       retries: 10
 
 networks:
-  rabbitmq-net:
+  sistema-ibt-network:
     driver: bridge
