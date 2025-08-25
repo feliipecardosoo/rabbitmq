@@ -1,22 +1,17 @@
 services:
   rabbitmq:
-    image: rabbitmq:4.1.0-management
-    container_name: rabbitmq
+    build: .
     ports:
-      - "5673:5672"       # RabbitMQ main port
-      - "15673:15672"     # RabbitMQ management UI
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
+      - "5673:5672"
+      - "15673:15672"
+    networks:
+      - rabbitmq-net
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 5s
       timeout: 5s
       retries: 10
 
-  app:
-    build: .
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-    restart: on-failure
+networks:
+  rabbitmq-net:
+    driver: bridge

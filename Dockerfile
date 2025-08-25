@@ -1,23 +1,9 @@
-# Build da aplicação Go
-FROM golang:1.24.6-alpine AS builder
+FROM rabbitmq:4.1.0-management
 
-WORKDIR /app
+ENV RABBITMQ_DEFAULT_USER=admin
+ENV RABBITMQ_DEFAULT_PASS=admin
 
-COPY go.mod go.sum ./
-RUN go mod download
+EXPOSE 5672 15672
 
-COPY . .
-
-RUN CGO_ENABLED=0 go build -o app main.go
-
-# Imagem final
-FROM alpine:3.19
-
-WORKDIR /app
-
-COPY --from=builder /app/app .
-
-# Variável de ambiente para conexão com RabbitMQ
-# ENV RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/
-
-CMD ["./app"]
+HEALTHCHECK --interval=5s --timeout=5s --retries=10 \
+  CMD rabbitmq-diagnostics ping || exit 1
