@@ -18,6 +18,6 @@ WORKDIR /app
 COPY --from=builder /app/app .
 
 # Variável de ambiente para conexão com RabbitMQ
-ENV RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/
+# ENV RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/
 
 CMD ["./app"]
