@@ -14,8 +14,8 @@ build: network
 
 # Sobe os containers via docker-compose
 up: build
-	docker compose -p $(PROJECT_NAME) up -d
-
+	docker compose -p $(PROJECT_NAME) up -d 
+	
 # Derruba os containers
 down:
 	docker compose -p $(PROJECT_NAME) down
