@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   rabbitmq:
     image: rabbitmq:4.1.0-management
@@ -13,6 +15,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    networks:
+      - sistema-ibt-network
 
   app:
     build: .
@@ -20,3 +24,9 @@ services:
       rabbitmq:
         condition: service_healthy
     restart: on-failure
+    networks:
+      - sistema-ibt-network
+
+networks:
+  sistema-ibt-network:
+    external: true
