@@ -1,4 +1,6 @@
-# Build da aplicação Go
+# =========================
+# Build da aplicação
+# =========================
 FROM golang:1.24.6-alpine AS builder
 
 WORKDIR /app
@@ -10,7 +12,9 @@ COPY . .
 
 RUN CGO_ENABLED=0 go build -o app main.go
 
+# =========================
 # Imagem final
+# =========================
 FROM alpine:3.19
 
 WORKDIR /app
@@ -18,6 +22,6 @@ WORKDIR /app
 COPY --from=builder /app/app .
 
 # Variável de ambiente para conexão com RabbitMQ
-# ENV RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/
+ENV RABBITMQ_URI=amqp://admin:admin@rabbitmq:5672/
 
 CMD ["./app"]
